@@ -1,0 +1,40 @@
+# Render Blueprint for the Companion App (blank template).
+# How it works: Render reads this file, builds the app with npm, and runs
+# the server. Values marked "sync: false" are secrets — Render will ask
+# you to type the real values into its dashboard; they are NEVER stored
+# in this file or in the git repo.
+services:
+  - type: web
+    name: companion-app
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install --legacy-peer-deps --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false
+      # OPTIONAL BYOAPI: set AI_PROVIDER to openai-compatible plus
+      # AI_API_KEY / AI_MODEL (and AI_BASE_URL if not OpenAI) to run the
+      # text brain on a non-Google provider. Leave unset for Gemini.
+      - key: AI_PROVIDER
+        sync: false
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        sync: false
+      - key: AI_MODEL
+        sync: false
+      - key: APP_ACCESS_PASSWORD
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: COMPANION_NAME
+        sync: false
+      - key: CLOUDFLARE_ACCOUNT_ID
+        sync: false
+      - key: CLOUDFLARE_API_TOKEN
+        sync: false

@@ -1,0 +1,73 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "Image",
+              "url": "/assets/companion_avatar.svg",
+              "size": "Small",
+              "style": "Person"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Companion",
+              "weight": "Bolder",
+              "size": "Medium",
+              "color": "Light"
+            },
+            {
+              "type": "TextBlock",
+              "text": "${status}",
+              "size": "Small",
+              "color": "Accent",
+              "spacing": "None"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "\"${thought}\"",
+      "wrap": true,
+      "size": "Small",
+      "color": "Light",
+      "spacing": "Medium"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Voice Link",
+      "url": "/?action=voice"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Direct Chat",
+      "url": "/?action=chat"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Scrapbook",
+      "url": "/?action=journal"
+    },
+    {
+      "type": "Action.OpenUrl",
+      "title": "Studio",
+      "url": "/?action=studio"
+    }
+  ]
+}

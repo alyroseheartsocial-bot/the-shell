@@ -1,0 +1,6 @@
+{
+  "name": "The Shell — Companion App Template",
+  "description": "A blank AI companion app shell: streaming chat, live voice, long-term memory, journal, image studio, and gallery. Add your own API key, companion name, and personality to make it yours.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

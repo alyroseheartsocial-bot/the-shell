@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480">
+  <defs>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="55%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="480" fill="#0d1536"/>
+  <circle cx="240" cy="240" r="170" fill="none" stroke="url(#ring)" stroke-width="6" opacity="0.9"/>
+  <circle cx="240" cy="240" r="118" fill="#16204d"/>
+  <!-- Generic companion face: two eyes and a friendly smile. Replace this file with your companion's own avatar image. -->
+  <circle cx="198" cy="218" r="16" fill="#7dd3fc"/>
+  <circle cx="282" cy="218" r="16" fill="#7dd3fc"/>
+  <path d="M186 282 Q240 326 294 282" fill="none" stroke="#7dd3fc" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="240" cy="118" r="10" fill="#a855f7"/>
+  <path d="M240 128 L240 96" stroke="#a855f7" stroke-width="6" stroke-linecap="round"/>
+</svg>

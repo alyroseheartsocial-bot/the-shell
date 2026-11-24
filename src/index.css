@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+}
+
+/* ---- UI Theme Skins -------------------------------------------------------
+   Colour slots for the app's big surfaces, switched by data-theme on <html>
+   (set pre-paint by the inline script in index.html, kept in sync by App.tsx
+   from the companion_theme_v1 localStorage key — set-and-stay, no auto-switch).
+   Alpha is baked into slot values: Tailwind cannot apply /opacity suffixes
+   to var() colours. Terminal values are the app's original extracted hexes,
+   so the Terminal skin is pixel-identical to the pre-theme app. */
+:root,
+:root[data-theme='terminal'] {
+  --bg-app: #060818;
+  --bg-header: rgb(6 9 29 / .95);
+  --bg-panel: rgb(8 13 36 / .95);
+  --bg-raised: #070b1e;
+  --bg-input: #0a0f2b;
+  --bg-bubble-user: rgb(19 29 66 / .95);
+  --bg-bubble-companion: rgb(10 18 46 / .92);
+  --border-panel: rgb(99 102 241 / .25);
+  --accent: #22d3ee;
+  --accent-2: #818cf8;
+  --glow: rgb(6 182 212 / .45);
+  --gradient-cta: linear-gradient(to top right, #06b6d4, #4f46e5, #9333ea);
+  --text-main: #f1f5f9;
+  --text-dim: #cbd5e1;
+  --text-faint: #94a3b8;
+}
+
+:root[data-theme='cottage'] {
+  --bg-app: #17100b;
+  --bg-header: rgb(29 19 12 / .95);
+  --bg-panel: rgb(33 22 16 / .95);
+  --bg-raised: #2a1c11;
+  --bg-input: #322315;
+  --bg-bubble-user: rgb(74 44 23 / .95);
+  --bg-bubble-companion: rgb(46 32 19 / .95);
+  --border-panel: rgb(217 164 92 / .28);
+  --accent: #f0a840;
+  --accent-2: #8fae7d;
+  --glow: rgb(240 168 64 / .40);
+  --gradient-cta: linear-gradient(to top right, #e08a35, #a8542c, #5f7350);
+  --text-main: #f6ecdc;
+  --text-dim: #e0cdb2;
+  --text-faint: #b89a76;
+}
+
+:root[data-theme='christmas'] {
+  --bg-app: #0a1a12;
+  --bg-header: rgb(12 32 21 / .95);
+  --bg-panel: rgb(15 39 24 / .95);
+  --bg-raised: #14331f;
+  --bg-input: #1a3d26;
+  --bg-bubble-user: rgb(87 31 27 / .95);
+  --bg-bubble-companion: rgb(18 53 36 / .95);
+  --border-panel: rgb(227 179 76 / .30);
+  --accent: #e8b84b;
+  --accent-2: #e5534b;
+  --glow: rgb(232 184 75 / .35);
+  --gradient-cta: linear-gradient(to top right, #d9a441, #b3372f, #2e7d4f);
+  --text-main: #f8f1de;
+  --text-dim: #e6d9bd;
+  --text-faint: #b3a67f;
+}
+
+:root[data-theme='midnight'] {
+  --bg-app: #0b0a1f;
+  --bg-header: rgb(16 14 43 / .95);
+  --bg-panel: rgb(20 17 54 / .95);
+  --bg-raised: #171340;
+  --bg-input: #1d1850;
+  --bg-bubble-user: rgb(52 38 110 / .95);
+  --bg-bubble-companion: rgb(26 22 66 / .92);
+  --border-panel: rgb(139 124 246 / .30);
+  --accent: #a78bfa;
+  --accent-2: #818cf8;
+  --glow: rgb(167 139 250 / .40);
+  --gradient-cta: linear-gradient(to top right, #7c5cf0, #4f46e5, #2563eb);
+  --text-main: #f0eefc;
+  --text-dim: #d4cff0;
+  --text-faint: #a49ccb;
+}
+
+:root[data-theme='sunset'] {
+  --bg-app: #1d0f14;
+  --bg-header: rgb(43 20 26 / .95);
+  --bg-panel: rgb(51 24 30 / .95);
+  --bg-raised: #33161f;
+  --bg-input: #3d1a24;
+  --bg-bubble-user: rgb(112 48 54 / .95);
+  --bg-bubble-companion: rgb(62 28 36 / .92);
+  --border-panel: rgb(251 158 125 / .30);
+  --accent: #fb9e7d;
+  --accent-2: #f472a0;
+  --glow: rgb(251 158 125 / .38);
+  --gradient-cta: linear-gradient(to top right, #f59e6d, #e05d75, #93356d);
+  --text-main: #fdf0e9;
+  --text-dim: #f3d3c2;
+  --text-faint: #c99a8a;
+}
+
+:root[data-theme='forest'] {
+  --bg-app: #0a140d;
+  --bg-header: rgb(15 29 19 / .95);
+  --bg-panel: rgb(18 35 23 / .95);
+  --bg-raised: #122619;
+  --bg-input: #17301f;
+  --bg-bubble-user: rgb(44 74 44 / .95);
+  --bg-bubble-companion: rgb(22 46 30 / .92);
+  --border-panel: rgb(163 190 120 / .28);
+  --accent: #a3be78;
+  --accent-2: #5f8f5a;
+  --glow: rgb(163 190 120 / .35);
+  --gradient-cta: linear-gradient(to top right, #7ba05b, #4a7c59, #2f5233);
+  --text-main: #eef4e4;
+  --text-dim: #d3dec2;
+  --text-faint: #9db08c;
+}
+
+:root[data-theme='ocean'] {
+  --bg-app: #07181c;
+  --bg-header: rgb(10 33 39 / .95);
+  --bg-panel: rgb(12 40 47 / .95);
+  --bg-raised: #0c2a31;
+  --bg-input: #10333b;
+  --bg-bubble-user: rgb(24 84 92 / .95);
+  --bg-bubble-companion: rgb(14 52 60 / .92);
+  --border-panel: rgb(94 196 182 / .28);
+  --accent: #5ec4b6;
+  --accent-2: #e6c98f;
+  --glow: rgb(94 196 182 / .38);
+  --gradient-cta: linear-gradient(to top right, #2ea89a, #1f7a8c, #c2a165);
+  --text-main: #ecf7f3;
+  --text-dim: #cfe6dd;
+  --text-faint: #93b8ad;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  height: 100%;
+  background-color: var(--bg-app);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* iOS Safe Area Inset Utility Classes (Supports Notch and Dynamic Island) */
+.pt-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 0px);
+}
+
+.header-safe {
+  padding-top: max(env(safe-area-inset-top, 0px), 0.5rem);
+}
+
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.5rem);
+}
+
+.pl-safe {
+  padding-left: max(env(safe-area-inset-left, 0px), 0px);
+}
+
+.pr-safe {
+  padding-right: max(env(safe-area-inset-right, 0px), 0px);
+}
+
+.mt-safe {
+  margin-top: max(env(safe-area-inset-top, 0px), 0px);
+}
+
+.mb-safe {
+  margin-bottom: max(env(safe-area-inset-bottom, 0px), 0px);
+}
+
+/* Dynamic Responsive Text Scale Utilities (Relative rem units) */
+.text-scale-90 { font-size: 0.9rem; }
+.text-scale-100 { font-size: 1rem; }
+.text-scale-110 { font-size: 1.1rem; }
+.text-scale-120 { font-size: 1.2rem; }
+.text-scale-130 { font-size: 1.3rem; }
+.text-scale-140 { font-size: 1.4rem; }
+.text-scale-150 { font-size: 1.5rem; }
+
+@keyframes hudSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hudSpinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes avatarBreathe {
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.018) translateY(-1.5px); }
+}
+
+@keyframes orbPulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@keyframes waveRipple {
+  0% { transform: scale(0.95); opacity: 0.75; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+
+.animate-hud-spin {
+  animation: hudSpin 32s linear infinite;
+  transform-origin: center;
+}
+
+.animate-hud-spin-reverse {
+  animation: hudSpinReverse 24s linear infinite;
+  transform-origin: center;
+}
+
+.animate-avatar-breathe {
+  animation: avatarBreathe 5.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-orb-pulse {
+  animation: orbPulse 4s ease-in-out infinite;
+}
+
+.animate-wave-ripple {
+  animation: waveRipple 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}

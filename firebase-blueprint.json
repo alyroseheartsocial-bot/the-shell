@@ -1,0 +1,146 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile settings including callsign, dynamic relationship notes, and preferences",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "callsign": { "type": "string" },
+        "dynamicNotes": { "type": "string" },
+        "preferredVoice": { "type": "string" },
+        "autoMessages": { "type": "boolean" },
+        "autoSpeakReplies": { "type": "boolean" },
+        "avatarUrl": { "type": "string" },
+        "createdAtMs": { "type": "number" },
+        "updatedAtMs": { "type": "number" }
+      },
+      "required": ["ownerId", "callsign"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Chat session with title, archive status, and summaries",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "title": { "type": "string" },
+        "isArchived": { "type": "boolean" },
+        "summary": { "type": "string" },
+        "lastMessagePreview": { "type": "string" },
+        "mood": { "type": "string" },
+        "focus": { "type": "string" },
+        "createdAtMs": { "type": "number" },
+        "updatedAtMs": { "type": "number" }
+      },
+      "required": ["ownerId", "title", "createdAtMs"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Turn in a conversation with sender, text, modality, and assets",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "sender": { "type": "string", "enum": ["user", "companion"] },
+        "content": { "type": "string" },
+        "thoughtStream": { "type": "string" },
+        "modality": { "type": "string", "enum": ["text", "voice", "image"] },
+        "assetId": { "type": "string" },
+        "createdAtMs": { "type": "number" }
+      },
+      "required": ["ownerId", "conversationId", "sender", "content", "createdAtMs"]
+    },
+    "MemoryNode": {
+      "title": "MemoryNode",
+      "description": "Long-term durable memory fact stored in Companion's Vault",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "category": { "type": "string" },
+        "fact": { "type": "string" },
+        "importance": { "type": "number" },
+        "sourceConversationId": { "type": "string" },
+        "createdAtMs": { "type": "number" },
+        "updatedAtMs": { "type": "number" }
+      },
+      "required": ["ownerId", "fact", "importance", "createdAtMs"]
+    },
+    "VisualCreation": {
+      "title": "VisualCreation",
+      "description": "Visual studio artwork and cyber vector creations in the user's gallery",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "prompt": { "type": "string" },
+        "stylePreset": { "type": "string" },
+        "aspectRatio": { "type": "string" },
+        "assetId": { "type": "string" },
+        "dataUrl": { "type": "string" },
+        "createdAtMs": { "type": "number" }
+      },
+      "required": ["ownerId", "prompt", "dataUrl", "createdAtMs"]
+    },
+    "CompanionJournalEntry": {
+      "title": "CompanionJournalEntry",
+      "description": "Companion's autonomous thought stream logs, private reflections, and unprompted observations",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "mood": { "type": "string" },
+        "focus": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "isAutonomous": { "type": "boolean" },
+        "createdAtMs": { "type": "number" },
+        "updatedAtMs": { "type": "number" }
+      },
+      "required": ["ownerId", "title", "content", "createdAtMs"]
+    },
+    "ChatAsset": {
+      "title": "ChatAsset",
+      "description": "Chat thread file, document, or visual media attachment synced across devices",
+      "type": "object",
+      "properties": {
+        "ownerId": { "type": "string" },
+        "assetId": { "type": "string" },
+        "name": { "type": "string" },
+        "mimeType": { "type": "string" },
+        "dataUrl": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "updatedAtMs": { "type": "number" }
+      },
+      "required": ["ownerId", "assetId", "dataUrl"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/profile/default": {
+      "schema": "UserProfile",
+      "description": "User profile configuration document"
+    },
+    "/users/{userId}/conversations/{conversationId}": {
+      "schema": "Conversation",
+      "description": "User conversations subcollection"
+    },
+    "/users/{userId}/conversations/{conversationId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Messages subcollection within a conversation"
+    },
+    "/users/{userId}/memories/{memoryId}": {
+      "schema": "MemoryNode",
+      "description": "User's long term memory vault"
+    },
+    "/users/{userId}/creations/{creationId}": {
+      "schema": "VisualCreation",
+      "description": "User's visual creations and gallery images"
+    },
+    "/users/{userId}/journal/{journalId}": {
+      "schema": "CompanionJournalEntry",
+      "description": "Companion's private thought stream and autonomous journal logs"
+    },
+    "/users/{userId}/assets/{assetId}": {
+      "schema": "ChatAsset",
+      "description": "Chat thread files and media attachments synchronized across user devices"
+    }
+  }
+}

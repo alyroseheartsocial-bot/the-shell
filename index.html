@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" data-theme="terminal">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>The Shell — Companion App</title>
+    <meta name="description" content="A blank AI companion app: streaming chat, live voice, long-term memory, journal, image studio, and gallery. Add your own API key and personality." />
+    <meta name="theme-color" content="#060818" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="The Shell" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <meta property="og:title" content="The Shell — Companion App" />
+    <meta property="og:description" content="A blank AI companion app: streaming chat, live voice, long-term memory, journal, image studio, and gallery. Add your own API key and personality." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Theme skin: apply the saved skin before first paint so a themed
+      // user never sees a navy Terminal flash on cold open.
+      // Set-and-stay: mirrors the companion_theme_v1 key owned by App.tsx.
+      (function () {
+        try {
+          var savedTheme = window.localStorage.getItem('companion_theme_v1');
+          var knownThemes = [
+            'terminal',
+            'cottage',
+            'christmas',
+            'midnight',
+            'sunset',
+            'forest',
+            'ocean',
+          ];
+          document.documentElement.dataset.theme =
+            knownThemes.indexOf(savedTheme) >= 0 ? savedTheme : 'terminal';
+        } catch (e) {
+          document.documentElement.dataset.theme = 'terminal';
+        }
+      })();
+    </script>
+    <script>
+      // Suppress Vite HMR WebSocket errors in AI Studio iframe environment
+      window.addEventListener('unhandledrejection', function (event) {
+        if (
+          event.reason &&
+          (String(event.reason.message || '').includes('WebSocket closed without opened') ||
+            String(event.reason.message || '').includes('failed to connect to websocket') ||
+            String(event.reason.stack || '').includes('@vite/client'))
+        ) {
+          event.preventDefault();
+        }
+      });
+      window.addEventListener('error', function (event) {
+        if (
+          String(event.message || '').includes('WebSocket closed without opened') ||
+          String(event.filename || '').includes('@vite/client')
+        ) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
